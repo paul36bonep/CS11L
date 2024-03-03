@@ -30,7 +30,7 @@ subchoice2 db 10,"[2] 2nd Semester",0
 subchoice3 db 10,"[3] Summer",0
 subchoice4 db 10,"[4] To Main menu", 0 
 
-;toYear
+;toYear Menu Variavbles
 y1choice db 10,"[1] To 1st Year Menu",0
 y2choice db 10,"[1] To 2nd Year Menu",0
 y3choice db 10,"[1] To 3rd Year Menu",0
@@ -118,15 +118,15 @@ psy312 db 10,"|  PSY 312/L | Psychological Assessment			|  3  |  2  |   5   | PS
 psy313 db 10,"|   PSY 313  | Research in Psychology I			|  3  |  0  |   3   | PSY 221/L|",0
 nstp1 db 10,"|    NSTP 1  | National Service Training Program 1	|  3  |  0  |   3   |   None   |",0
 ;------------------------------------------------------------------------------------------------------
-ge20 db 9,"|    GE 20   | Reading Visual Arts			|  3  |  0  |   3   |   None   |",0
-psy321 db 9,"|  PSY 321   | Research in Psychology II		|  6  |  0  |   6   |   None   |",0
-psy322 db 9,"|  PSY 322   | Community Health Psychology		|  3  |  0  |   3   |   None   |",0
-psy323 db 9,"|  PSY 323   | Introduction to Clinical Psychology	|  3  |  0  |   3   |   None   |",0
-nstp2 db 9,"|   NSTP 2  | National Service Training Program 2	|  3  |  0  |   3   |   None   |",0
+ge20 db 10,"|    GE 20   | Reading Visual Arts			|  3  |  0  |   3   |   None   |",0
+psy321 db 10,"|  PSY 321   | Research in Psychology II		|  6  |  0  |   6   |   None   |",0
+psy322 db 10,"|  PSY 322   | Community Health Psychology		|  3  |  0  |   3   |   None   |",0
+psy323 db 10,"|  PSY 323   | Introduction to Clinical Psychology	|  3  |  0  |   3   |   None   |",0
+nstp2 db 10,"|   NSTP 2  | National Service Training Program 2	|  3  |  0  |   3   |   None   |",0
 
 ;total Units
 y3s1total db 10,9,9,9,9,9,"|  Total Units  |  21 |  2  |   23  |",0
-y3s2total db 9,9,9,9,9,9,9,9,"|  Total Units  |  18 |  0  |   18  |",0
+y3s2total db 10,9,9,9,9,9,"|  Total Units  |  18 |  0  |   18  |",0
 ;------------------------------------------------------------------------------------------------------
 
 
@@ -138,16 +138,16 @@ psy326 db 10,"|  PSY 326   | Practicum in Psychology			|  6  |  0  |   6   |PSY 
 psy3264 db 10,"|            | 						|     |     |       | PSY 322, |",0
 psy3265 db 10,"|            | 						|     |     |       | PSY 324  |",0
 ;------------------------------------------------------------------------------------------------------
-psy500 db 9,"|  PSY 500   | Psychological Testing/Assessment		|  3  |  0  |   3   |          |",0
-psy5011 db 9,"|            | 						|     |     |       |          |",0
-psy501 db 9,"|  PSY 501   | Abnormal Psychology			|  3  |  0  |   3   | PSY 326  |",0
-psy502 db 9,"| PSY 502a   | Developmental Psychology			|  3  |  0  |   3   |Graduating|",0
-psy503 db 9,"|  PSY 503   | Industrial/Organizational Psychology	|  3  |  0  |   3   |          |",0
+psy500 db 10,"|  PSY 500   | Psychological Testing/Assessment		|  3  |  0  |   3   |          |",0
+psy5011 db 10,"|            | 						|     |     |       |          |",0
+psy501 db 10,"|  PSY 501   | Abnormal Psychology			|  3  |  0  |   3   | PSY 326  |",0
+psy502 db 10,"| PSY 502a   | Developmental Psychology			|  3  |  0  |   3   |Graduating|",0
+psy503 db 10,"|  PSY 503   | Industrial/Organizational Psychology	|  3  |  0  |   3   |          |",0
 
 
 ;total Units
 y4s1total db 10,9,9,9,9,9,"|  Total Units  |  9  |  2  |   9   |",0
-y4s2total db 9,9,9,9,9,9,9,9,"|  Total Units  |  12 |  0  |   12  |",0
+y4s2total db 10,9,9,9,9,9,"|  Total Units  |  12 |  0  |   12  |",0
 
 
 .data? ; input Variables
@@ -193,6 +193,9 @@ jmp exit
 ;##################################End of MenuOptions##############################
 
 
+
+
+;####################################### YEAR 1 START ########################################
 first:
 invoke ClearScreen
 ;submenu
@@ -253,7 +256,15 @@ jmp tomain1st
 .elseif(subchoice == "3")
 ;Summer
 invoke ClearScreen
+invoke ClearScreen
+invoke StdOut, addr collegeHead
+invoke StdOut, addr majorHead
+invoke StdOut, addr year1Head
+
 invoke StdOut, addr summerHead
+invoke StdOut, addr subject2Head
+
+;print subjects
 invoke StdOut, addr ge8
 invoke StdOut, addr psy125
 invoke StdOut, addr psy212
@@ -276,9 +287,11 @@ jmp first
 .elseif (A1 == "2")
 jmp start
 .endif
-;#######################################Year 1 End########################################
+;####################################### YEAR 1 END ########################################
 
 
+
+;####################################### YEAR 2 START ########################################
 second:
 invoke ClearScreen
 ;submenu
@@ -339,7 +352,14 @@ jmp tomain2nd
 .elseif(subchoice == "3")
 ;Summer
 invoke ClearScreen
+invoke ClearScreen
+invoke StdOut, addr collegeHead
+invoke StdOut, addr majorHead
+invoke StdOut, addr year2Head
+
 invoke StdOut, addr summerHead
+invoke StdOut, addr subject2Head
+
 invoke StdOut, addr psy122
 invoke StdOut, addr psy324
 invoke StdOut, addr psy211
@@ -353,7 +373,6 @@ jmp start
 
 tomain2nd:
 ;-----to Main Menu----------
-invoke StdOut, addr toMenuPrompt
 invoke StdOut, addr y2choice
 invoke StdOut, addr tomainmenuchoice
 invoke StdOut, addr MenuPrompt
@@ -363,121 +382,169 @@ jmp second
 .elseif (A2 == "2")
 jmp start
 .endif
-;#######################################Year 2 End########################################
+;####################################### YEAR 2 END ########################################
 
 
 
 
 
-
+;####################################### YEAR 3 START ########################################
 third:
 invoke ClearScreen
+;submenu
+invoke StdOut, addr submenuHead
+invoke StdOut, addr subchoice1
+invoke StdOut, addr subchoice2
+invoke StdOut, addr subchoice4
+invoke StdOut, addr MenuPrompt
+invoke StdIn, addr subchoice, 10
+
+.if (subchoice == "1")
+;1st Semester
+
 ;header
+invoke ClearScreen
 invoke StdOut, addr collegeHead
 invoke StdOut, addr majorHead
 invoke StdOut, addr year3Head
 
 invoke StdOut, addr semester1Head
-invoke StdOut, addr semester2Head
 invoke StdOut, addr subject1Head
-invoke StdOut, addr subject2Head
 
 ;print subjects
 invoke StdOut, addr ge11
-invoke StdOut, addr blank
-
 invoke StdOut, addr psy214
-invoke StdOut, addr blank
 invoke StdOut, addr psy2142
-invoke StdOut, addr blank
-
 invoke StdOut, addr ge9
-invoke StdOut, addr ge20
-
 invoke StdOut, addr psy311
-invoke StdOut, addr psy321
-
 invoke StdOut, addr psy312
-invoke StdOut, addr psy322
-
 invoke StdOut, addr psy313
-invoke StdOut, addr psy323
-
 invoke StdOut, addr nstp1
-invoke StdOut, addr nstp2
 
 invoke StdOut, addr y3s1total
+
+jmp tomain3rd
+
+.elseif (subchoice == "2")
+;2nd Semester
+
+;header
+invoke ClearScreen
+invoke StdOut, addr collegeHead
+invoke StdOut, addr majorHead
+invoke StdOut, addr year3Head
+
+invoke StdOut, addr semester2Head
+invoke StdOut, addr subject2Head
+
+;print subjects
+
+invoke StdOut, addr ge20
+invoke StdOut, addr psy321
+invoke StdOut, addr psy322
+invoke StdOut, addr psy323
+invoke StdOut, addr nstp2
+
 invoke StdOut, addr y3s2total
 
+jmp tomain3rd
 
-
-;-----to Main Menu----------
-invoke StdOut, addr toMenuPrompt
-invoke StdIn, addr A3, 10
-.if(A3 == "Y")
+.elseif (subchoice == "4")
 jmp start
-.elseif (A3 == "y")
-jmp start
-.elseif (A3 == "N")
-jmp exit
-.elseif (A3 == "n")
-jmp exit
 .endif
-;#######################################Year 3 End########################################
+
+
+tomain3rd:
+;-----to Main Menu----------
+invoke StdOut, addr y3choice
+invoke StdOut, addr tomainmenuchoice
+invoke StdOut, addr MenuPrompt
+invoke StdIn, addr A3, 10
+.if(A3 == "1")
+jmp second
+.elseif (A3 == "2")
+jmp start
+.endif
+;####################################### YEAR 3 END ########################################
 
 
 
+;####################################### YEAR 4 START ########################################
 fourth:
 invoke ClearScreen
+;submenu
+invoke StdOut, addr submenuHead
+invoke StdOut, addr subchoice1
+invoke StdOut, addr subchoice2
+invoke StdOut, addr subchoice4
+invoke StdOut, addr MenuPrompt
+invoke StdIn, addr subchoice, 10
+
+.if (subchoice == "1")
+;1st Semester
+
 ;header
+invoke ClearScreen
 invoke StdOut, addr collegeHead
 invoke StdOut, addr majorHead
 invoke StdOut, addr year4Head
 
 invoke StdOut, addr semester1Head
-invoke StdOut, addr semester2Head
 invoke StdOut, addr subject1Head
-invoke StdOut, addr subject2Head
 
 ;print subjects
 invoke StdOut, addr caed500
-invoke StdOut, addr psy500
-
 invoke StdOut, addr psy3261
-invoke StdOut, addr psy5011
 invoke StdOut, addr psy3262
-invoke StdOut, addr psy5011
-
 invoke StdOut, addr psy326
-invoke StdOut, addr psy501
-
 invoke StdOut, addr psy3264
-invoke StdOut, addr psy502
-
 invoke StdOut, addr psy3265
+invoke StdOut, addr y4s1total
+
+jmp tomain4th
+
+.elseif (subchoice == "2")
+;2nd Semester
+
+;header
+invoke ClearScreen
+invoke StdOut, addr collegeHead
+invoke StdOut, addr majorHead
+invoke StdOut, addr year4Head
+
+invoke StdOut, addr semester2Head
+invoke StdOut, addr subject2Head
+
+;print subjects
+
+invoke StdOut, addr psy500
+invoke StdOut, addr psy5011
+invoke StdOut, addr psy5011
+invoke StdOut, addr psy501
+invoke StdOut, addr psy502
 invoke StdOut, addr psy503
 
-
-invoke StdOut, addr y4s1total
 invoke StdOut, addr y4s2total
 
-;-----to Main Menu----------
-invoke StdOut, addr toMenuPrompt
-invoke StdIn, addr A4, 10
-.if(A4 == "Y")
+jmp tomain4th
+
+.elseif (subchoice == "4")
+
 jmp start
-.elseif (A4 == "y")
-jmp start
-.elseif (A4 == "N")
-jmp exit
-.elseif (A4 == "n")
-jmp exit
 .endif
-;#######################################Year 4 End########################################
 
-
-
-
+tomain4th:
+;-----to Main Menu----------
+invoke StdOut, addr y4choice
+invoke StdOut, addr tomainmenuchoice
+invoke StdOut, addr MenuPrompt
+invoke StdIn, addr A4, 10
+.if(A4 == "1")
+jmp second
+.elseif (A4 == "2")
+jmp start
+.endif
+;####################################### YEAR 4 END ########################################
 
 
 
@@ -499,8 +566,6 @@ jmp exit
 .elseif (A5 == "n")
 jmp exit
 .endif
-
-
 
 
 exit:
