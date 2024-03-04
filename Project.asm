@@ -12,7 +12,12 @@ includelib \masm32\lib\masm32.lib
 ;prompts/choice
 toMenuPrompt db 10,10,"Go back to menu?(Y/N): ", 0
 MenuPrompt db 10,"Choose an action: ", 0
+subchoiceEnroll db 10,10,"Enroll Courses(Y/N)? ",0
+subchoiceEnrollcon db 10,"Add More Courses(Y/N)", 0
+subchoiceCode db 10, "Choose Code to enroll: ", 0
 tester db 10,"Hello", 0 ;tester for debugging
+
+
 
 ;Main Menu Variables
 menuHead db "-Menu-", 0
@@ -23,12 +28,15 @@ choice4 db 10,"[4]4th Year" , 0
 EndMenu db 10,"[6]Exit" , 0
 showAll db 10,"[5]Show All" , 0
 
+
+
 ;Sub Menu Variables
 submenuHead db "-Sub Menu-", 0
 subchoice1 db 10,"[1] 1st Semester",0
 subchoice2 db 10,"[2] 2nd Semester",0
 subchoice3 db 10,"[3] Summer",0
-subchoice4 db 10,"[4] To Main menu", 0 
+subchoice4 db 10,"[4] To Main menu", 0
+
 
 ;toYear Menu Variavbles
 y1choice db 10,"[1] To 1st Year Menu",0
@@ -36,6 +44,7 @@ y2choice db 10,"[1] To 2nd Year Menu",0
 y3choice db 10,"[1] To 3rd Year Menu",0
 y4choice db 10,"[1] To 4th Year Menu",0
 tomainmenuchoice db 10,"[2] Main Menu",0
+
 
 ;Header Variables
 collegeHead db "-----COLLEGE OF ARTS AND SCIENCES-----", 0
@@ -148,19 +157,24 @@ psy503 db 10,"|  PSY 503   | Industrial/Organizational Psychology	|  3  |  0  | 
 ;total Units
 y4s1total db 10,9,9,9,9,9,"|  Total Units  |  9  |  2  |   9   |",0
 y4s2total db 10,9,9,9,9,9,"|  Total Units  |  12 |  0  |   12  |",0
+;------------------------------------------------------------------------------------------------------
 
 
-.data? ; input Variables
+;########################################## START INPUTS VARIABLES ###############################################
+.data? 
 menuchoice db 10 dup(?)
 subchoice db 10 dup(?)
+enrollchoice db 10 dup (?)
+enrollcode db 20 dup (?)
 A1 db 10 dup(?)
 A2 db 10 dup(?)
 A3 db 10 dup(?)
 A4 db 10 dup(?)
 A5 db 10 dup(?)
 
-.code
+;########################################## INPUTS VARIABLES END ###############################################
 
+.code
 start:
 ;----------Main Menu-----------
 invoke ClearScreen
@@ -190,7 +204,7 @@ jmp exit
 
 .endif
 
-;##################################End of MenuOptions##############################
+;################################## END OF MENU OPTIONS ##############################
 
 
 
@@ -228,7 +242,94 @@ invoke StdOut, addr psy112
 invoke StdOut, addr pahf1
 invoke StdOut, addr y1s1total
 
-jmp tomain1st
+;if enrollment
+invoke StdOut, addr subchoiceEnroll
+invoke StdIn, addr enrollchoice, 10
+
+	.if (enrollchoice == "Y" || enrollchoice == "y")
+		;header
+		
+		ge4choice db 10,"[1]GE4",0
+		ge1choice db 10,"[2]GE1",0
+		ge2choice db 10,"[3]GE2",0
+		psy111choice db 10,"[4]PSY111",0
+		bio204choice db 10,"[5]BIO204",0
+		psy112choice db 10,"[6]PSY112",0
+		pahf1choice db 10,"[7]PAHF1",0
+		
+		invoke StdOut, addr ge4choice
+		invoke StdOut, addr ge1choice
+		invoke StdOut, addr ge2choice
+		invoke StdOut, addr psy111choice
+		invoke StdOut, addr bio204choice
+		invoke StdOut, addr psy112choice
+		invoke StdOut, addr pahf1choice
+		
+		invoke StdOut, addr subchoiceCode
+		invoke StdIn, addr enrollcode, 10
+		
+		.if (enrollcode == "1")
+			
+			invoke StdOut, addr subchoiceEnrollcon
+			invoke StdIn, addr enrollchoice, 10
+			
+			.if (enrollchoice == "Y" || enrollchoice == "y")
+				ge1choice db 10,"[1]GE1",0
+				ge2choice db 10,"[2]GE2",0
+				psy111choice db 10,"[3]PSY111",0
+				bio204choice db 10,"[4]BIO204",0
+				psy112choice db 10,"[5]PSY112",0
+				pahf1choice db 10,"[6]PAHF1",0
+				
+				invoke StdOut, addr ge1choice
+				invoke StdOut, addr ge2choice
+				invoke StdOut, addr psy111choice
+				invoke StdOut, addr bio204choice
+				invoke StdOut, addr psy112choice
+				invoke StdOut, addr pahf1choice
+		
+				invoke StdOut, addr subchoiceCode
+				invoke StdIn, addr enrollcode, 10
+					
+				.if (enrollchoice == "Y" || enrollchoice == "y")
+					
+				.elseif (enrollchoice == "N" || enrollchoice == "n")
+					invoke StdOut, addr ge4
+					invoke StdOut, addr ge1
+					jmp tomain1st
+				.endif
+			
+				
+				
+			.elseif (enrollchoice == "N" || enrollchoice == "n")
+				invoke StdOut, addr ge4
+				jmp tomain1st
+			.endif
+		
+		.elseif (enrollcode == "2")
+		
+		.elseif (enrollcode == "3")
+		
+		.elseif (enrollcode == "4")
+		
+		.elseif (enrollcode == "5")
+		
+		.elseif (enrollcode == "6")
+		
+		.elseif (enrollcode == "7")
+		
+		.elseif (enrollcode == "8")
+			jmp tomain1st
+		.endif
+
+	
+	
+	
+		jmp start 
+	.elseif (enrollchoice == "N" || enrollchoice == "n")
+	
+		jmp tomain1st
+	.endif
 
 .elseif(subchoice == "2")
 ;2nd Semester
@@ -255,7 +356,6 @@ jmp tomain1st
 
 .elseif(subchoice == "3")
 ;Summer
-invoke ClearScreen
 invoke ClearScreen
 invoke StdOut, addr collegeHead
 invoke StdOut, addr majorHead
@@ -545,11 +645,6 @@ jmp second
 jmp start
 .endif
 ;####################################### YEAR 4 END ########################################
-
-
-
-
-
 
 
 everything:
