@@ -18,7 +18,6 @@ subchoiceCode db 10, "Choose Code to enroll: ", 0
 tester db 10,"Hello", 0 ;tester for debugging
 
 
-
 ;Main Menu Variables
 menuHead db "-Menu-", 0
 choice1 db 10,"[1]1st Year" , 0
@@ -87,62 +86,8 @@ y1s1total db 10,9,9,9,9,9,"|  Total Units  |  23 |  4  |   27  |",0
 y1s2total db 10,9,9,9,9,9,"|  Total Units  |  23 |  2  |   25  |",0
 y1sumtotal db 10,9,9,9,9,9,"|  Total Units  |  9  |  0  |   9   |",0
 ;--------------------------------------------------------------------------------------------------------
-;for year1 enrollment
-		ge4choice1 db 10,"[1]GE4",0
-		ge4choice2 db 10,"[2]GE4",0
-		ge4choice3 db 10,"[3]GE4",0
-		ge4choice4 db 10,"[4]GE4",0
-		ge4choice5 db 10,"[5]GE4",0
-		ge4choice6 db 10,"[6]GE4",0
-		ge4choice7 db 10,"[7]GE4",0
-		
-		ge1choice1 db 10,"[1]GE1",0
-		ge1choice2 db 10,"[2]GE1",0
-		ge1choice3 db 10,"[3]GE1",0
-		ge1choice4 db 10,"[4]GE1",0
-		ge1choice5 db 10,"[5]GE1",0
-		ge1choice6 db 10,"[6]GE1",0
-		ge1choice7 db 10,"[7]GE1",0
-		
-		ge2choice1 db 10,"[1]GE2",0
-		ge2choice2 db 10,"[2]GE2",0
-		ge2choice3 db 10,"[3]GE2",0
-		ge2choice4 db 10,"[4]GE2",0
-		ge2choice5 db 10,"[5]GE2",0
-		ge2choice6 db 10,"[6]GE2",0
-		ge2choice7 db 10,"[7]GE2",0
-		
-		psy111choice1 db 10,"[1]PSY111",0
-		psy111choice2 db 10,"[2]PSY111",0
-		psy111choice3 db 10,"[3]PSY111",0
-		psy111choice4 db 10,"[4]PSY111",0
-		psy111choice5 db 10,"[5]PSY111",0
-		psy111choice6 db 10,"[6]PSY111",0
-		psy111choice7 db 10,"[7]PSY111",0
-		
-		bio204choice1 db 10,"[1]BIO204",0
-		bio204choice2 db 10,"[2]BIO204",0
-		bio204choice3 db 10,"[3]BIO204",0
-		bio204choice4 db 10,"[4]BIO204",0
-		bio204choice5 db 10,"[5]BIO204",0
-		bio204choice6 db 10,"[6]BIO204",0
-		bio204choice7 db 10,"[7]BIO204",0
-		
-		psy112choice1 db 10,"[1]PSY112",0
-		psy112choice2 db 10,"[2]PSY112",0
-		psy112choice3 db 10,"[3]PSY112",0
-		psy112choice4 db 10,"[4]PSY112",0
-		psy112choice5 db 10,"[5]PSY112",0
-		psy112choice6 db 10,"[6]PSY112",0
-		psy112choice7 db 10,"[7]PSY112",0
-		
-		pahf1choice1 db 10,"[1]PAHF1",0
-		pahf1choice2 db 10,"[2]PAHF1",0
-		pahf1choice3 db 10,"[3]PAHF1",0
-		pahf1choice4 db 10,"[4]PAHF1",0
-		pahf1choice5 db 10,"[5]PAHF1",0
-		pahf1choice6 db 10,"[6]PAHF1",0
-		pahf1choice7 db 10,"[7]PAHF1",0	
+
+
 
 ;year2 subjects Variables
 ge5 db 10,"|    GE 5    | Science, Technology, and Society		|  3  |  0  |   3   |   None   |",0
@@ -225,7 +170,6 @@ A2 db 10 dup(?)
 A3 db 10 dup(?)
 A4 db 10 dup(?)
 A5 db 10 dup(?)
-transition db 10 dup (?)
 
 ;########################################## INPUTS VARIABLES END ###############################################
 
@@ -302,561 +246,83 @@ invoke StdOut, addr subchoiceEnroll
 invoke StdIn, addr enrollchoice, 10
 
 	.if (enrollchoice == "Y" || enrollchoice == "y")
-		invoke ClearScreen
-		invoke StdOut, addr ge4choice1
-		invoke StdOut, addr ge1choice2
-		invoke StdOut, addr ge2choice3
-		invoke StdOut, addr psy111choice4
-		invoke StdOut, addr bio204choice5
-		invoke StdOut, addr psy112choice6
-		invoke StdOut, addr pahf1choice7
+		;header
+		
+		ge4choice db 10,"[1]GE4",0
+		ge1choice db 10,"[2]GE1",0
+		ge2choice db 10,"[3]GE2",0
+		psy111choice db 10,"[4]PSY111",0
+		bio204choice db 10,"[5]BIO204",0
+		psy112choice db 10,"[6]PSY112",0
+		pahf1choice db 10,"[7]PAHF1",0
+		
+		invoke StdOut, addr ge4choice
+		invoke StdOut, addr ge1choice
+		invoke StdOut, addr ge2choice
+		invoke StdOut, addr psy111choice
+		invoke StdOut, addr bio204choice
+		invoke StdOut, addr psy112choice
+		invoke StdOut, addr pahf1choice
 		
 		invoke StdOut, addr subchoiceCode
 		invoke StdIn, addr enrollcode, 10
 		
-		.if (enrollcode == "1");ge4
-		
+		.if (enrollcode == "1")
+			
 			invoke StdOut, addr subchoiceEnrollcon
 			invoke StdIn, addr enrollchoice, 10
 			
 			.if (enrollchoice == "Y" || enrollchoice == "y")
-				invoke ClearScreen
-				invoke StdOut, addr ge1choice1
-				invoke StdOut, addr ge2choice2
-				invoke StdOut, addr psy111choice3
-				invoke StdOut, addr bio204choice4
-				invoke StdOut, addr psy112choice5
-				invoke StdOut, addr pahf1choice6
+				ge1choice db 10,"[1]GE1",0
+				ge2choice db 10,"[2]GE2",0
+				psy111choice db 10,"[3]PSY111",0
+				bio204choice db 10,"[4]BIO204",0
+				psy112choice db 10,"[5]PSY112",0
+				pahf1choice db 10,"[6]PAHF1",0
+				
+				invoke StdOut, addr ge1choice
+				invoke StdOut, addr ge2choice
+				invoke StdOut, addr psy111choice
+				invoke StdOut, addr bio204choice
+				invoke StdOut, addr psy112choice
+				invoke StdOut, addr pahf1choice
 		
 				invoke StdOut, addr subchoiceCode
 				invoke StdIn, addr enrollcode, 10
-				
-				.if(enrollcode == "1") ;ge4,ge1
-				
-					invoke StdOut, addr subchoiceEnrollcon
-					invoke StdIn, addr enrollchoice, 10
 					
-					.if (enrollchoice == "Y" || enrollchoice == "y") 
-						invoke ClearScreen			
-						invoke StdOut, addr ge2choice1
-						invoke StdOut, addr psy111choice2
-						invoke StdOut, addr bio204choice3
-						invoke StdOut, addr psy112choice4
-						invoke StdOut, addr pahf1choice5
-		
-						invoke StdOut, addr subchoiceCode
-						invoke StdIn, addr enrollcode, 10
-						
-						.if (enrollcode == "1");ge4,ge1,ge2
-						
-							invoke StdOut, addr subchoiceEnrollcon
-							invoke StdIn, addr enrollchoice, 10
-							
-							.if (enrollchoice == "Y" || enrollchoice == "y")
-								invoke ClearScreen
-								invoke StdOut, addr psy111choice1
-								invoke StdOut, addr bio204choice2
-								invoke StdOut, addr psy112choice3
-								invoke StdOut, addr pahf1choice4
-								
-								invoke StdOut, addr subchoiceCode
-								invoke StdIn, addr enrollcode, 10
-								
-								.if (enrollcode == "1");ge4,ge1,ge2,psy111
-								
-									invoke StdOut, addr subchoiceEnrollcon
-									invoke StdIn, addr enrollchoice, 10
-									
-									.if (enrollchoice == "Y" || enrollchoice == "y")
-										invoke ClearScreen
-										invoke StdOut, addr bio204choice1
-										invoke StdOut, addr psy112choice2
-										invoke StdOut, addr pahf1choice3
-										
-										invoke StdOut, addr subchoiceCode
-										invoke StdIn, addr enrollcode, 10
-										
-										.if (enrollcode == "1");ge4,ge1,ge2,psy111,bio204
-											
-											invoke StdOut, addr subchoiceEnrollcon
-											invoke StdIn, addr enrollchoice, 10
-											
-											.if (enrollchoice == "Y" || enrollchoice == "y")
-												invoke ClearScreen
-												invoke StdOut, addr psy112choice1
-												invoke StdOut, addr pahf1choice2
-												
-												invoke StdOut, addr subchoiceCode
-												invoke StdIn, addr enrollcode, 10
-												
-												.if (enrollcode == "1");ge4,ge1,ge2,psy111,bio204, PSY112
-													
-													invoke StdOut, addr subchoiceEnrollcon
-													invoke StdIn, addr enrollchoice, 10
-													
-													.if (enrollchoice == "Y" || enrollchoice == "y");print ge4,ge1,ge2,psy111,bio204,PSY112, pahf1
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr bio204
-														invoke StdOut, addr psy112
-														invoke StdOut, addr pahf1
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-														
-													.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4,ge1,ge2,psy111,bio204,PSY112
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr bio204
-														invoke StdOut, addr psy112
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-													.endif
-													
-												.elseif (enrollcode == "2");ge4,ge1,ge2,psy111,bio204, PSY112, pahf1
-													
-													invoke StdOut, addr subchoiceEnrollcon
-													invoke StdIn, addr enrollchoice, 10
-													
-													.if (enrollchoice == "Y" || enrollchoice == "y")
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr bio204
-														invoke StdOut, addr pahf1
-														invoke StdOut, addr psy112
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-													
-													.elseif (enrollchoice == "N" || enrollchoice == "n")
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr bio204
-														invoke StdOut, addr pahf1
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-													
-													.endif
-												
-												.endif
-												
-												
-											.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4,ge1,ge2,psy111,bio204
-												invoke ClearScreen
-												invoke StdOut, addr ge4
-												invoke StdOut, addr ge1
-												invoke StdOut, addr ge2
-												invoke StdOut, addr psy111
-												invoke StdOut, addr bio204
-												invoke StdIn, addr transition, 1
-												jmp tomain1st
-											.endif
-											
-										.elseif (enrollcode == "2");ge4,ge1,ge2,psy111,psy112
-										
-											invoke StdOut, addr subchoiceEnrollcon
-											invoke StdIn, addr enrollchoice, 10
-											
-											.if (enrollchoice == "Y" || enrollchoice == "y")
-												invoke ClearScreen
-												invoke StdOut, addr bio204choice1
-												invoke StdOut, addr pahf1choice2
-		
-												invoke StdOut, addr subchoiceCode
-												invoke StdIn, addr enrollcode, 10
-												
-												.if (enrollcode == "1");ge4,ge1,ge2,psy111,psy112,bio204
-													invoke StdOut, addr subchoiceEnrollcon
-													invoke StdIn, addr enrollchoice, 10
-													
-													.if (enrollchoice == "Y" || enrollchoice == "y");printAll
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr psy112
-														invoke StdOut, addr bio204
-														invoke StdOut, addr pahf1
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-													
-													.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4,ge1,ge2,psy111,psy112,bio204
-														invoke ClearScreen
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr psy112
-														invoke StdOut, addr bio204
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-													.endif
-													
-												.elseif (enrollcode == "2");ge4,ge1,ge2,psy111,psy112,pahf1
-													invoke StdOut, addr subchoiceEnrollcon
-													invoke StdIn, addr enrollchoice, 10
-													
-													.if (enrollchoice == "Y" || enrollchoice == "y")
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr psy112
-														invoke StdOut, addr pahf1
-														invoke StdOut, addr bio204
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-														
-													.elseif (enrollchoice == "N" || enrollchoice == "n")
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr psy112
-														invoke StdOut, addr pahf1
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-														
-													.endif
-												
-												.endif
-											
-											.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4,ge1,ge2,psy111,psy112
-												invoke ClearScreen
-												invoke StdOut, addr ge4
-												invoke StdOut, addr ge1
-												invoke StdOut, addr ge2
-												invoke StdOut, addr psy111
-												invoke StdOut, addr psy112
-												invoke StdIn, addr transition, 1
-												jmp tomain1st
-												
-											.endif
-											
-											
-											
-										.elseif (enrollcode == "3");ge4,ge1,ge2,psy111,pahf1
-										
-											invoke StdOut, addr subchoiceEnrollcon
-											invoke StdIn, addr enrollchoice, 10
-											
-											.if (enrollchoice == "Y" || enrollchoice == "y")
-												invoke ClearScreen
-												invoke StdOut, addr bio204choice1
-												invoke StdOut, addr psy112choice2
-		
-												invoke StdOut, addr subchoiceCode
-												invoke StdIn, addr enrollcode, 10
-												
-												.if (enrollcode == "1");ge4,ge1,ge2,psy111,pafh1,bio204
-													invoke StdOut, addr subchoiceEnrollcon
-													invoke StdIn, addr enrollchoice, 10
-													
-													.if (enrollchoice == "Y" || enrollchoice == "y");printAll
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr psy112
-														invoke StdOut, addr pahf1
-														invoke StdOut, addr bio204
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-													
-													.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4,ge1,ge2,psy111,pahf1,bio204
-														invoke ClearScreen
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr pahf1
-														invoke StdOut, addr bio204
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-													.endif
-													
-												.elseif (enrollcode == "2");ge4,ge1,ge2,psy111,pafh1,psy112
-													invoke StdOut, addr subchoiceEnrollcon
-													invoke StdIn, addr enrollchoice, 10
-													
-													.if (enrollchoice == "Y" || enrollchoice == "y");printAll
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr pahf1
-														invoke StdOut, addr psy112
-														invoke StdOut, addr bio204
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-														
-													.elseif (enrollchoice == "N" || enrollchoice == "n");ge4,ge1,ge2,psy111,pafh1,psy112
-														invoke ClearScreen
-														invoke StdOut, addr ge4
-														invoke StdOut, addr ge1
-														invoke StdOut, addr ge2
-														invoke StdOut, addr psy111
-														invoke StdOut, addr pahf1
-														invoke StdOut, addr psy112
-														invoke StdIn, addr transition, 1
-														jmp tomain1st
-														
-													.endif
-												
-												.endif
-												
-												
-												
-											.elseif (enrollchoice == "N" || enrollchoice == "n")
-												invoke ClearScreen
-												invoke StdOut, addr ge4
-												invoke StdOut, addr ge1
-												invoke StdOut, addr ge2
-												invoke StdOut, addr psy111
-												invoke StdOut, addr pahf1
-												invoke StdIn, addr transition, 1
-												jmp tomain1st
-												
-											.endif
-												
-										.endif
-										
-									.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4,ge1,ge2,psy111
-										invoke ClearScreen
-										invoke StdOut, addr ge4
-										invoke StdOut, addr ge1
-										invoke StdOut, addr ge2
-										invoke StdOut, addr psy111
-										invoke StdIn, addr transition, 1
-										jmp tomain1st
-									.endif
-									
-								.elseif (enrollcode == "2");ge4,ge1,ge2,bio204
-									
-									
-								
-								.elseif (enrollcode == "3");ge4,ge1,ge2,psy112
-								
-								.elseif (enrollcode == "4");ge4,ge1,ge2,pahf1
-								
-								.endif
-								
-							.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4,ge1,ge2
-								invoke ClearScreen
-								invoke StdOut, addr ge4
-								invoke StdOut, addr ge1
-								invoke StdOut, addr ge2
-								invoke StdIn, addr transition, 1
-								jmp tomain1st
-							
-							.endif
-							
-						.elseif (enrollcode == "2");ge4,ge1,psy111
-							invoke ClearScreen
-							invoke StdOut, addr ge2choice1
-							invoke StdOut, addr bio204choice2
-							invoke StdOut, addr psy112choice3
-							invoke StdOut, addr pahf1choice4
-		
-							invoke StdOut, addr subchoiceCode
-							invoke StdIn, addr enrollcode, 10
-						
-						.elseif (enrollcode == "3");;ge4,ge1,bio204
-							invoke ClearScreen
-							invoke StdOut, addr ge2choice1
-							invoke StdOut, addr psy111choice2
-							invoke StdOut, addr psy112choice3
-							invoke StdOut, addr pahf1choice4
-		
-							invoke StdOut, addr subchoiceCode
-							invoke StdIn, addr enrollcode, 10
-						
-						.elseif (enrollcode == "4");ge4,ge1,psy112
-							invoke ClearScreen
-							invoke StdOut, addr ge2choice1
-							invoke StdOut, addr psy111choice2
-							invoke StdOut, addr bio204choice3
-							invoke StdOut, addr pahf1choice4
-		
-							invoke StdOut, addr subchoiceCode
-							invoke StdIn, addr enrollcode, 10
-						
-						.elseif (enrollcode == "5");ge4,ge1,pahf1
-							invoke ClearScreen
-							invoke StdOut, addr ge2choice1
-							invoke StdOut, addr psy111choice2
-							invoke StdOut, addr bio204choice3
-							invoke StdOut, addr psy112choice4
-		
-							invoke StdOut, addr subchoiceCode
-							invoke StdIn, addr enrollcode, 10
-						
-						.endif
-						
-						
-					.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4,ge1
-						invoke ClearScreen
-						invoke StdOut, addr ge4
-						invoke StdOut, addr ge1
-						invoke StdIn, addr transition, 10
-						jmp tomain1st
-					.endif
-				
-				.elseif(enrollcode == "2");ge4,ge2
-					invoke ClearScreen
-					invoke StdOut, addr ge1choice1
-					invoke StdOut, addr psy111choice2
-					invoke StdOut, addr bio204choice3
-					invoke StdOut, addr psy112choice4
-					invoke StdOut, addr pahf1choice5
-		
-					invoke StdOut, addr subchoiceCode
-					invoke StdIn, addr enrollcode, 10
-				
-				.elseif(enrollcode == "3");ge4,psy111
-					invoke ClearScreen
-					invoke StdOut, addr ge1choice1
-					invoke StdOut, addr ge2choice2
-					invoke StdOut, addr bio204choice3
-					invoke StdOut, addr psy112choice4
-					invoke StdOut, addr pahf1choice5
-		
-					invoke StdOut, addr subchoiceCode
-					invoke StdIn, addr enrollcode, 10
-				
-				.elseif(enrollcode == "4");ge4,bio204
-					invoke ClearScreen
-					invoke StdOut, addr ge1choice1
-					invoke StdOut, addr ge2choice2
-					invoke StdOut, addr psy111choice3
-					invoke StdOut, addr psy112choice4
-					invoke StdOut, addr pahf1choice5
-		
-					invoke StdOut, addr subchoiceCode
-					invoke StdIn, addr enrollcode, 10
-				
-				.elseif(enrollcode == "5");ge4,psy112
-					invoke ClearScreen
-					invoke StdOut, addr ge1choice1
-					invoke StdOut, addr ge2choice2
-					invoke StdOut, addr psy111choice3
-					invoke StdOut, addr bio204choice4
-					invoke StdOut, addr pahf1choice5
-		
-					invoke StdOut, addr subchoiceCode
-					invoke StdIn, addr enrollcode, 10
-				
-				
-				.elseif(enrollcode == "6");ge4,pahf1
-					invoke ClearScreen
-					invoke StdOut, addr ge1choice1
-					invoke StdOut, addr ge2choice2
-					invoke StdOut, addr psy111choice3
-					invoke StdOut, addr bio204choice4
-					invoke StdOut, addr psy112choice5
-		
-					invoke StdOut, addr subchoiceCode
-					invoke StdIn, addr enrollcode, 10
-				
+				.if (enrollchoice == "Y" || enrollchoice == "y")
+					
+				.elseif (enrollchoice == "N" || enrollchoice == "n")
+					invoke StdOut, addr ge4
+					invoke StdOut, addr ge1
+					jmp tomain1st
 				.endif
+			
 				
-			.elseif (enrollchoice == "N" || enrollchoice == "n");print ge4
+				
+			.elseif (enrollchoice == "N" || enrollchoice == "n")
 				invoke StdOut, addr ge4
-				invoke StdIn, addr transition, 10
 				jmp tomain1st
 			.endif
 		
-		.elseif (enrollcode == "2");ge1
-			invoke ClearScreen
-			invoke StdOut, addr ge4choice1
-			invoke StdOut, addr ge2choice2
-			invoke StdOut, addr psy111choice3
-			invoke StdOut, addr bio204choice4
-			invoke StdOut, addr psy112choice5
-			invoke StdOut, addr pahf1choice6
+		.elseif (enrollcode == "2")
 		
-			invoke StdOut, addr subchoiceCode
-			invoke StdIn, addr enrollcode, 10
+		.elseif (enrollcode == "3")
 		
-		.elseif (enrollcode == "3");ge2
-			invoke ClearScreen
-			invoke StdOut, addr ge4choice1
-			invoke StdOut, addr ge1choice2
-			invoke StdOut, addr psy111choice3
-			invoke StdOut, addr bio204choice4
-			invoke StdOut, addr psy112choice5
-			invoke StdOut, addr pahf1choice6
+		.elseif (enrollcode == "4")
 		
-			invoke StdOut, addr subchoiceCode
-			invoke StdIn, addr enrollcode, 10
+		.elseif (enrollcode == "5")
 		
-		.elseif (enrollcode == "4");psy111
-			invoke ClearScreen
-			invoke StdOut, addr ge4choice1
-			invoke StdOut, addr ge1choice2
-			invoke StdOut, addr ge2choice3
-			invoke StdOut, addr bio204choice4
-			invoke StdOut, addr psy112choice5
-			invoke StdOut, addr pahf1choice6
+		.elseif (enrollcode == "6")
 		
-			invoke StdOut, addr subchoiceCode
-			invoke StdIn, addr enrollcode, 10
+		.elseif (enrollcode == "7")
 		
-		.elseif (enrollcode == "5");bio204
-			invoke ClearScreen
-			invoke StdOut, addr ge4choice1
-			invoke StdOut, addr ge1choice2
-			invoke StdOut, addr ge2choice3
-			invoke StdOut, addr psy111choice4
-			invoke StdOut, addr psy112choice5
-			invoke StdOut, addr pahf1choice6
-		
-			invoke StdOut, addr subchoiceCode
-			invoke StdIn, addr enrollcode, 10
-		
-		.elseif (enrollcode == "6");psy112
-			invoke ClearScreen
-			invoke StdOut, addr ge4choice1
-			invoke StdOut, addr ge1choice2
-			invoke StdOut, addr ge2choice3
-			invoke StdOut, addr psy111choice4
-			invoke StdOut, addr bio204choice5
-			invoke StdOut, addr pahf1choice6
-		
-			invoke StdOut, addr subchoiceCode
-			invoke StdIn, addr enrollcode, 10
-		
-		.elseif (enrollcode == "7");pahf1
-			invoke ClearScreen
-			invoke StdOut, addr ge4choice1
-			invoke StdOut, addr ge1choice2
-			invoke StdOut, addr ge2choice3
-			invoke StdOut, addr psy111choice4
-			invoke StdOut, addr bio204choice5
-			invoke StdOut, addr psy112choice6
-		
-			invoke StdOut, addr subchoiceCode
-			invoke StdIn, addr enrollcode, 10
-		
+		.elseif (enrollcode == "8")
+			jmp tomain1st
 		.endif
 
+	
+	
 	
 		jmp start 
 	.elseif (enrollchoice == "N" || enrollchoice == "n")
